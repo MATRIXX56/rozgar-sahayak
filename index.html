@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rozgaar Sahayak – Job, Resume &amp; Document Helper</title>
+<meta name="description" content="Free AI helper for jobs, resumes, interviews and government schemes in Indian languages">
+<style>
+:root{--bg:#090d1a;--card:rgba(22,29,54,.78);--ink:#e8ecff;--mute:#8f9bc4;--ac:#7c5cff;--ac2:#22d3ee;--acink:#fff;--soft:rgba(124,92,255,.16);--line:rgba(140,160,255,.2);--me:#5b4bdb;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-theme="light"]{--bg:#f1f3ff;--card:rgba(255,255,255,.92);--ink:#16203a;--mute:#667085;--ac:#5b4bdb;--ac2:#0891b2;--soft:#ebe8ff;--line:#d9ddf0;--me:#5b4bdb}
+html{scroll-padding-top:env(safe-area-inset-top,0px);background:radial-gradient(1000px 520px at 8% -10%,rgba(124,92,255,.28),transparent 60%),radial-gradient(800px 460px at 100% 0,rgba(34,211,238,.18),transparent 60%),var(--bg);background-attachment:fixed}
+html,body{height:100%;margin:0}
+option,optgroup{background:var(--bg);color:var(--ink)}
+header h1{background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
+header,nav,.bar,.m,.out,.card,.tile{backdrop-filter:blur(10px)}
+.btn{background:linear-gradient(135deg,var(--ac),var(--ac2));box-shadow:0 4px 18px rgba(124,92,255,.35)}
+.btn.alt{background:var(--soft);color:var(--ink);box-shadow:none;border:1px solid var(--line)}
+.me{background:linear-gradient(135deg,var(--me),var(--ac))!important}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;line-height:1.55;font-size:.93rem}
+.card h3{margin:0 0 6px;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ac2)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 6px;text-align:center;color:var(--ink);font-size:.8rem;cursor:pointer}
+.tile b{display:block;font-size:1.4rem;margin-bottom:2px}
+.tile:hover,.tile.on{border-color:var(--ac2);box-shadow:0 0 14px rgba(34,211,238,.25)}
+body{background:transparent;color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Devanagari",sans-serif;display:flex;flex-direction:column;max-width:820px;margin:0 auto}
+header{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--card);border-bottom:1px solid var(--line)}
+header h1{margin:0;font-size:.98rem;flex:1}
+select,input,textarea{font:inherit;font-size:.92rem;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 10px;width:100%;box-sizing:border-box}
+header select{width:auto;max-width:104px;min-width:0}header h1{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+nav{overflow-x:auto;display:flex;gap:6px;padding:8px 10px;background:var(--card);border-bottom:1px solid var(--line)}
+nav button{flex:0 0 auto;white-space:nowrap;padding-left:12px!important;padding-right:12px!important;border:0;background:transparent;color:var(--mute);padding:9px 4px;border-radius:10px;font-weight:600;font-size:.88rem;cursor:pointer}
+nav button.on{background:var(--soft);color:var(--ac)}
+.pane{display:none;flex:1;min-height:0;flex-direction:column}
+.pane.on{display:flex}
+#log{flex:1;overflow-y:auto;padding:14px 12px;display:flex;flex-direction:column;gap:10px}
+.m{max-width:88%;padding:10px 13px;border-radius:14px;line-height:1.5;font-size:.94rem;word-wrap:break-word;border:1px solid var(--line)}
+.bot{background:var(--card);align-self:flex-start;border-bottom-left-radius:4px}
+.me{background:var(--me);color:#fff;align-self:flex-end;border-bottom-right-radius:4px;border-color:transparent}
+.modes,.chips{display:flex;flex-wrap:wrap;gap:8px;padding:8px 12px 0}
+.modes button,.chips button{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:7px 12px;font-size:.82rem;cursor:pointer}
+.modes button.on{background:var(--ac);color:var(--acink);border-color:var(--ac)}
+.bar{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--line);background:var(--card)}
+.bar textarea{resize:none;max-height:100px}
+.btn{background:var(--ac);color:var(--acink);border:0;border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer}
+.btn.alt{background:var(--soft);color:var(--ac)}
+.btn:disabled{opacity:.5}
+.form{padding:14px;overflow-y:auto;display:grid;gap:10px}
+.form label{font-size:.8rem;color:var(--mute);display:grid;gap:4px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:520px){.row{grid-template-columns:1fr}}
+.out{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;line-height:1.55;font-size:.92rem;display:none}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.out h1{font-size:1.35rem;margin:0 0 4px;color:var(--ac)}.out h2{font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;margin:16px 0 6px;padding-bottom:3px;border-bottom:2px solid var(--ac)}.out p{margin:4px 0}.out ul{margin:4px 0;padding-left:20px}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.tools .btn{padding:8px 12px;font-size:.85rem}a.btn{text-decoration:none;display:inline-block;text-align:center}a.btn.off{pointer-events:none;opacity:.45}
+.note{font-size:.72rem;color:var(--mute);text-align:center;padding:6px 12px}
+</style>
+</head>
+<body>
+<header><h1>💼 Rozgaar Sahayak</h1>
+<button id="theme" class="btn alt" style="padding:7px 10px" aria-label="Theme">☀️</button><select id="lang" aria-label="Language"></select></header>
+<nav><button data-p="today" class="on">🏠 Today</button><button data-p="chat" id="n1"></button><button data-p="docs" id="n3"></button><button data-p="sc">🏛 Schemes</button><button data-p="iv">🎤 Interview</button><button data-p="ats">✅ Resume Score</button><button data-p="rm">🗺 Roadmap</button><button data-p="qz">🧪 Mock Test</button><button data-p="resume" id="n2" style="display:none"></button></nav>
+
+<section class="pane on" id="today"><div class="form">
+<div class="card"><h3 id="t_date"></h3><div id="t_hi" style="font-size:1.1rem;font-weight:700">Namaste! 👋</div></div>
+<div class="card"><h3>💡 Aaj ka job tip</h3><div id="tip"></div></div>
+<div class="card" style="border-color:rgba(255,120,120,.4)"><h3 style="color:#ff8a8a">🚨 Scam alert</h3><div id="scam"></div></div>
+<div class="grid" id="tiles"></div>
+<div class="card"><h3>🤖 AI se aur tips lein</h3><div class="chips" style="padding:0" id="tchips"></div><div class="out" id="t_out" dir="auto" style="margin-top:10px"></div></div>
+</div></section>
+<section class="pane" id="chat">
+<div class="modes" id="modes"></div>
+<div class="chips" id="ctools"></div><div id="log"></div>
+<div class="chips" id="chips"></div>
+<div class="note" id="warn"></div>
+<form class="bar" id="f"><textarea id="t" rows="1"></textarea><button class="btn alt" type="button" id="mic">🎙</button><button class="btn" id="send" type="submit"></button></form>
+</section>
+
+<section class="pane" id="resume"><div class="form">
+<label><span data-k="rp"></span><textarea id="r_prompt" rows="7" data-ph="rph"></textarea></label>
+<button class="btn" id="rbtn"></button>
+<div class="out" id="rout" dir="auto"></div>
+<div class="actions" id="ract" style="display:none"><input id="r_fix" data-ph="fixph" style="flex:1;min-width:180px"><button class="btn alt" id="rfix" data-k="fixb"></button><button class="btn alt" id="rdl"></button></div>
+</div></section>
+
+<section class="pane" id="docs"><div class="form">
+<div class="grid" id="d_cards"></div><label style="display:none"><span data-k="dtype"></span><select id="d_type"><option value="resume">Resume</option><option value="cover">Cover</option><option value="assignment">Assignment</option><option value="ppt">PPT</option><option value="letter">Letter</option><option value="report">Report</option><option value="linkedin">LinkedIn</option><option value="notes">Notes</option><option value="email">Email</option></select></label>
+<label><span data-k="dp"></span><textarea id="d_prompt" rows="6"></textarea></label>
+<button class="btn" id="dbtn"></button>
+<div class="out" id="dout" dir="auto"></div>
+<div class="actions" id="dact" style="display:none"><input id="d_fix" data-ph="fixph" style="flex:1;min-width:180px"><button class="btn alt" id="dfix" data-k="fixb"></button><button class="btn alt" id="dppt">⬇ PowerPoint (.pptx)</button><button class="btn alt" id="ddl"></button></div>
+</div></section>
+
+<section class="pane" id="sc"><div class="form">
+<div class="chips" style="padding:0" id="schips"></div>
+<label>Apni situation batayein (kisi bhi bhasha mein)<textarea id="s_in" rows="4" placeholder="E.g. Main UP se hoon, 12th pass, ghar par silai aati hai, apna kaam shuru karna chahti hoon, loan chahiye."></textarea></label>
+<div class="row"><label>Category<select id="s_cat"><option>Koi bhi / General</option><option>OBC</option><option>SC</option><option>ST</option><option>EWS</option><option>Minority</option><option>Divyang (PwD)</option></select></label>
+<label>Kya chahiye<select id="s_goal"><option>Naukri / apprenticeship</option><option>Skill training</option><option>Apna kaam / loan</option><option>Scholarship / padhai</option><option>Kheti / kisan</option><option>Mahila yojana</option></select></label></div>
+<button class="btn" id="s_go">🏛 Meri yojanayein dhundho</button>
+<div class="out" id="s_out" dir="auto"></div>
+</div></section>
+<section class="pane" id="iv"><div class="form">
+<label>Kis job / exam ka interview?<input id="iv_job" placeholder="e.g. Sales executive, SSC CGL, Nurse, Driver"></label>
+<button class="btn" id="iv_go">▶ Mock interview shuru karein</button>
+<div class="out" id="iv_out" dir="auto"></div>
+<div class="actions" id="iv_act" style="display:none"><textarea id="iv_ans" rows="3" placeholder="Jawab likhein ya 🎙 se bolein" style="flex:1;min-width:200px"></textarea><button class="btn alt" id="iv_mic">🎙</button><button class="btn alt" id="iv_say">🔊</button><button class="btn" id="iv_send">Jawab bhejein</button></div>
+</div></section>
+<section class="pane" id="ats"><div class="form">
+<label>Aapka resume (paste karein)<textarea id="a_res" rows="6"></textarea></label>
+<button class="btn alt" id="a_use">Resume tab wala resume lein</button>
+<label>Job title ya job description<textarea id="a_job" rows="4" placeholder="Jis job ke liye apply kar rahe hain"></textarea></label>
+<button class="btn" id="a_go">✅ Score aur improve karein</button><div class="out" id="a_out" dir="auto"></div>
+</div></section>
+<section class="pane" id="rm"><div class="form">
+<label>Aap abhi kahan hain aur kahan pahunchna hai?<textarea id="m_in" rows="5" placeholder="E.g. 10th pass, ghar par rehta hoon, 6 mahine mein kamai shuru karni hai. Ya: B.Com final year, bank PO banna hai."></textarea></label>
+<button class="btn" id="m_go">🗺 Mera roadmap banao</button><div class="out" id="m_out" dir="auto"></div>
+</div></section>
+<section class="pane" id="qz"><div class="form">
+<label>Exam / topic<input id="q_topic" placeholder="e.g. SSC GK, Railway Maths, Banking Reasoning, Excel basics"></label>
+<label>Kitne sawaal<select id="q_n"><option>5</option><option selected>10</option></select></label>
+<button class="btn" id="q_go">🧪 Test shuru karein</button><div id="q_out"></div>
+</div></section>
+<div id="wa" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:50;align-items:flex-end;justify-content:center"><div class="card" style="width:100%;max-width:520px;border-radius:18px 18px 0 0;background:var(--bg);padding:16px 16px calc(16px + env(safe-area-inset-bottom,0px))">
+<h3 style="font-size:1rem;margin:0 0 8px;text-transform:none;letter-spacing:0;color:var(--ink)">📲 WhatsApp par bhejein</h3>
+<div style="display:flex;gap:8px"><input id="wa_cc" value="91" inputmode="numeric" style="width:72px" aria-label="Country code"><input id="wa_n" inputmode="tel" placeholder="Mobile number (jaise 98xxxxxxxx)" style="flex:1"></div>
+<p style="font-size:.78rem;color:var(--mute);margin:8px 0">Apna number daalenge to khud ko bhej sakte hain. WhatsApp khulega, wahan <b>Send</b> dabayein. Bahut lamba text 3000 akshar tak jata hai, poora document ke liye pehle Save karein.</p>
+<div class="actions"><a class="btn off" id="wa_go" target="_blank" rel="noopener">📲 WhatsApp kholo</a><button class="btn alt" id="wa_copy" type="button">📋 Copy</button><button class="btn alt" id="wa_x" type="button">Band karein</button></div>
+</div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pptxgenjs/3.12.0/pptxgen.bundle.js"></script>
+<script>
+// ---- API shim: purana Claude-sample ab apne /api/chat ko call karta hai ----
+const apiSample=async(input,opts)=>{const messages=typeof input==='string'?[{role:'user',content:input}]:input;let r;
+try{r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages})})}catch(e){throw{code:'network',message:'network'}}
+if(!r.ok)throw{code:r.status===429?'rate_limited':'error',message:'API '+r.status};
+const d=await r.json();const text=d.text||'';if(opts&&opts.onText)opts.onText({text});return{text,truncated:false}};
+const claude={use:async n=>n==='sample'?apiSample:n==='downloads'?{save:async({filename,data})=>{const a=document.createElement('a');a.href=URL.createObjectURL(data);a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000)}}:null};
+</script>
+<script>
+const L={
+hinglish:{n1:'💬 Chat',n2:'📄 Resume',n3:'📝 Documents',send:'Bhejein',ph:'Apna sawaal likhiye…',warn:'AI galti kar sakta hai. Aadhaar ya bank details na likhein. Job ke naam par paise maangna scam ho sakta hai.',
+hi:'Namaste! 🙏 Main aapko naukri dhundhne mein madad karunga. Aap kya padhe hain aur kis tarah ka kaam chahiye?',
+modeP:'Private job',modeG:'Sarkari naukri',name:'Poora naam',phone:'Phone',city:'Shehar',goal:'Kaunsi job chahiye',edu:'Padhai',skills:'Skills',exp:'Experience',
+rb:'✨ Resume banao',rdl:'⬇ Resume save karein',dtype:'Kya banana hai',topic:'Topic / vishay',level:'Level',len:'Lambai',extra:'Koi khaas baat (optional)',db:'✨ Banao',ddl:'⬇ Save karein',wait:'Ban raha hai…',
+rp:'Apne bare mein apni bhasha mein batayein',rph:'Jaise: Main Rahul hoon, Aligarh se. 12th pass 2022 mein, 68%. 1 saal mobile shop par kaam kiya, customers ko handle karta tha. Excel aur typing aati hai. Sales ya store jaisi job chahiye. Phone 98xxxxxxxx.',dp:'Kya chahiye, batayein',dph:'Jaise: Class 10 ke liye Digital India par 2 page ka assignment, simple bhasha mein, 5 points ke saath.',fixph:'Badlav likhein (jaise: chhota karo, English mein karo)',fixb:'Badlo',chips:['12th pass hoon, job chahiye','Interview ki tayyari','Free skill training kahan milti hai?'],chipsG:['SSC, Railway, Police mein kya farak hai?','Tayyari kaise shuru karein?','Form bharte waqt kya dhyan rakhein?']},
+hindi:{n1:'💬 चैट',n2:'📄 रिज़्यूमे',n3:'📝 दस्तावेज़',send:'भेजें',ph:'अपना सवाल लिखिए…',warn:'एआई गलती कर सकता है। आधार या बैंक डिटेल न लिखें। नौकरी के नाम पर पैसे माँगना धोखा हो सकता है।',
+hi:'नमस्ते! 🙏 मैं नौकरी ढूँढने में आपकी मदद करूँगा। आपने कितनी पढ़ाई की है और कैसा काम चाहिए?',
+modeP:'प्राइवेट नौकरी',modeG:'सरकारी नौकरी',name:'पूरा नाम',phone:'फ़ोन',city:'शहर',goal:'कौन-सी नौकरी चाहिए',edu:'पढ़ाई',skills:'स्किल्स',exp:'अनुभव',
+rb:'✨ रिज़्यूमे बनाओ',rdl:'⬇ रिज़्यूमे सेव करें',dtype:'क्या बनाना है',topic:'विषय',level:'स्तर',len:'लंबाई',extra:'कोई खास बात (वैकल्पिक)',db:'✨ बनाओ',ddl:'⬇ सेव करें',wait:'बन रहा है…',
+rp:'अपने बारे में अपनी भाषा में बताइए',rph:'जैसे: मैं राहुल हूँ, अलीगढ़ से। 2022 में 12वीं पास, 68%। 1 साल मोबाइल शॉप पर काम किया। एक्सेल और टाइपिंग आती है। सेल्स या स्टोर की नौकरी चाहिए।',dp:'क्या चाहिए, बताइए',dph:'जैसे: कक्षा 10 के लिए डिजिटल इंडिया पर 2 पेज का असाइनमेंट, सरल भाषा में।',fixph:'बदलाव लिखें (जैसे: छोटा करो, अंग्रेज़ी में करो)',fixb:'बदलो',chips:['12वीं पास हूँ, नौकरी चाहिए','इंटरव्यू की तैयारी','मुफ़्त स्किल ट्रेनिंग कहाँ मिलती है?'],chipsG:['SSC, रेलवे, पुलिस में क्या फ़र्क है?','तैयारी कैसे शुरू करें?','फ़ॉर्म भरते समय क्या ध्यान रखें?']},
+english:{n1:'💬 Chat',n2:'📄 Resume',n3:'📝 Documents',send:'Send',ph:'Type your question…',warn:'AI can make mistakes. Do not enter Aadhaar or bank details. Asking for money for a job may be a scam.',
+hi:'Hello! 🙏 I can help you find work. What is your education and what kind of job do you want?',
+modeP:'Private jobs',modeG:'Government jobs',name:'Full name',phone:'Phone',city:'City',goal:'Target job',edu:'Education',skills:'Skills',exp:'Experience',
+rb:'✨ Build resume',rdl:'⬇ Save resume',dtype:'What to create',topic:'Topic',level:'Level',len:'Length',extra:'Anything specific (optional)',db:'✨ Create',ddl:'⬇ Save',wait:'Working…',
+rp:'Tell me about yourself, in any language',rph:'E.g. I am Rahul from Aligarh. Passed 12th in 2022, 68%. Worked 1 year at a mobile shop handling customers. Know Excel and typing. Want a sales or store job. Phone 98xxxxxxxx.',dp:'Describe what you need',dph:'E.g. A 2-page assignment on Digital India for Class 10, simple language, with 5 key points.',fixph:'Type a change (e.g. make it shorter, translate)',fixb:'Update',chips:['I passed 12th, I need a job','Interview preparation','Where can I get free skill training?'],chipsG:['SSC vs Railway vs Police?','How do I start preparing?','What to check while filling forms?']}};
+const LANGS=[
+['auto','🌐 Auto (jis bhasha mein likhein)','the same language the user writes in'],
+['hinglish','Hinglish','Hinglish (Roman Hindi + simple English)'],['hindi','हिन्दी','simple Hindi in Devanagari script'],
+['g1','— भारत की भाषाएँ —'],
+['bn','বাংলা (Bengali)','Bengali'],['mr','मराठी (Marathi)','Marathi'],['ta','தமிழ் (Tamil)','Tamil'],['te','తెలుగు (Telugu)','Telugu'],['gu','ગુજરાતી (Gujarati)','Gujarati'],['kn','ಕನ್ನಡ (Kannada)','Kannada'],['ml','മലയാളം (Malayalam)','Malayalam'],['pa','ਪੰਜਾਬੀ (Punjabi)','Punjabi in Gurmukhi'],['or','ଓଡ଼ିଆ (Odia)','Odia'],['as','অসমীয়া (Assamese)','Assamese'],['ur','اردو (Urdu)','Urdu'],['bho','भोजपुरी (Bhojpuri)','Bhojpuri in Devanagari'],['mai','मैथिली (Maithili)','Maithili'],['ne','नेपाली (Nepali)','Nepali'],['sa','संस्कृतम् (Sanskrit)','Sanskrit'],['kok','कोंकणी (Konkani)','Konkani'],['sd','سنڌي (Sindhi)','Sindhi'],['ks','کٲشُر (Kashmiri)','Kashmiri'],['sat','ᱥᱟᱱᱛᱟᱲᱤ (Santali)','Santali'],['doi','डोगरी (Dogri)','Dogri'],['mni','মৈতৈলোন্ (Manipuri)','Manipuri'],['brx','बड़ो (Bodo)','Bodo'],
+['g2','— World languages —'],
+['english','English','simple English'],['es','Español','Spanish'],['fr','Français','French'],['de','Deutsch','German'],['pt','Português','Portuguese'],['it','Italiano','Italian'],['nl','Nederlands','Dutch'],['ru','Русский','Russian'],['uk','Українська','Ukrainian'],['pl','Polski','Polish'],['tr','Türkçe','Turkish'],['ar','العربية','Arabic'],['fa','فارسی','Persian'],['he','עברית','Hebrew'],['zh','中文 (简体)','Simplified Chinese'],['ja','日本語','Japanese'],['ko','한국어','Korean'],['id','Bahasa Indonesia','Indonesian'],['ms','Bahasa Melayu','Malay'],['vi','Tiếng Việt','Vietnamese'],['th','ไทย','Thai'],['fil','Filipino','Filipino'],['sw','Kiswahili','Swahili'],['am','አማርኛ','Amharic'],['ha','Hausa','Hausa'],['el','Ελληνικά','Greek'],['sv','Svenska','Swedish'],['si','සිංහල','Sinhala'],['my','မြန်မာ','Burmese']];
+const LN=Object.fromEntries(LANGS.filter(x=>x[2]).map(x=>[x[0],x[2]]));
+const INDIAN=['auto','hinglish','hindi','bn','mr','ta','te','gu','kn','ml','pa','or','as','ur','bho','mai','ne','sa','kok','sd','ks','sat','doi','mni','brx'];
+const TT=()=>L[lang]||(INDIAN.includes(lang)?L.hinglish:L.english);
+const SYS=()=>"Tum 'Rozgaar Sahayak' ho, India ke logon ka dostana AI helper. Jawab ki bhasha: "+LN[lang]+". Chhote, saaf jawab do; zarurat par bullets (- ) use karo. "+
+(mode==='gov'?"Abhi SARKARI NAUKRI mode hai: SSC, Railway (RRB), Police, Banking (IBPS/SBI), Defence, UPSC/State PSC, teaching jaise exams ke bare mein eligibility, exam pattern, tayyari ka plan aur form bharne ke tips batao. Dates/vacancies ka daawa mat karo, hamesha official site (jaise ssc.gov.in, indianrailways.gov.in, upsc.gov.in) par verify karne ko kaho.":"Pehle 2-3 sawaal poochkar samjho: padhai, skills, shehar, kaam ka type. Phir suitable job types, free training (Skill India, PMKVY, ncs.gov.in), resume aur interview tayyari mein step-by-step madad karo. Live vacancy ya exact salary ka daawa mat karo.")+
+" Chetavni: job ke naam par registration fee ya paise maangna scam ho sakta hai. Respectful raho.";
+const $=id=>document.getElementById(id);let lang='hinglish',mode='pvt',history=[],busy=false,sample=null,dl=null,lastR='',lastD='';
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const fmt=s=>esc(s).replace(/^#{1,3} (.+)$/gm,'<b>$1</b>').replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/^[-*•] (.+)$/gm,'• $1').replace(/\n/g,'<br>');
+function fmt2(t){const ls=esc(t).split('\n');let h='',ul=false;const cl=()=>{if(ul){h+='</ul>';ul=false}};ls.forEach(l=>{let m;if(m=l.match(/^# (.+)/)){cl();h+='<h1>'+m[1]+'</h1>'}else if(m=l.match(/^#{2,3} (.+)/)){cl();h+='<h2>'+m[1]+'</h2>'}else if(m=l.match(/^\s*[-*•] (.+)/)){if(!ul){h+='<ul>';ul=true}h+='<li>'+m[1]+'</li>'}else if(l.trim()){cl();h+='<p>'+l+'</p>'}else cl()});cl();return h.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>')}
+function ui(){const T=TT();$('n1').textContent=T.n1;$('n2').textContent=T.n2;$('n3').textContent=T.n3;$('send').textContent=T.send;$('t').placeholder=T.ph;$('warn').textContent=T.warn;
+$('rbtn').textContent=T.rb;$('rdl').textContent=T.rdl;$('dbtn').textContent=T.db;$('ddl').textContent=T.ddl;
+document.querySelectorAll('[data-ph]').forEach(e=>e.placeholder=T[e.dataset.ph]);document.querySelectorAll('[data-k]').forEach(e=>e.textContent=T[e.dataset.k]);
+$('modes').innerHTML='';[['pvt',T.modeP],['gov',T.modeG]].forEach(([k,v])=>{const b=document.createElement('button');b.textContent=v;b.className=mode===k?'on':'';b.onclick=()=>{mode=k;history=[];$('log').innerHTML='';hello();ui()};$('modes').appendChild(b)});
+$('n3').textContent='🎨 Studio';chipsUI()}
+function chipsUI(){const c=$('chips');c.innerHTML='';c.style.display=history.length?'none':'flex';(mode==='gov'?TT().chipsG:TT().chips).forEach(q=>{const b=document.createElement('button');b.textContent=q;b.onclick=()=>ask(q);c.appendChild(b)})}
+function add(r,t){const d=document.createElement('div');d.className='m '+(r==='user'?'me':'bot');d.dir='auto';r==='user'?d.textContent=t:d.innerHTML=fmt(t);$('log').appendChild(d);$('log').scrollTop=1e9;return d}
+function hello(){add('bot',TT().hi)}
+$('lang').onchange=e=>{lang=e.target.value;history=[];$('log').innerHTML='';hello();ui()};
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button,.pane').forEach(x=>x.classList.remove('on'));b.classList.add('on');$(b.dataset.p).classList.add('on')});
+async function S(){if(!sample)try{sample=await claude.use('sample')}catch(e){}return sample}
+function err(e){return e&&e.code==='not_granted'?'AI chalane ki permission chahiye. Allow dabayein.':e&&e.code==='rate_limited'?'Thodi der ruk kar dobara try karein.':'Kuch gadbad ho gayi. Dobara koshish karein.'}
+async function ask(q){q=q.trim();if(!q||busy)return;$('t').value='';busy=true;$('send').disabled=true;add('user',q);history.push({role:'user',content:q});chipsUI();const out=add('bot','…');
+try{const s=await S();if(!s){out.textContent='AI feature yahan available nahi hai.';history.pop();return}
+const input=history.map((m,i)=>i===0?{role:'user',content:SYS()+"\n\nUser ka pehla message: "+m.content}:m);
+const r=await s(input,{cache:false,onText:({text})=>{out.innerHTML=fmt(text);$('log').scrollTop=1e9}});out.innerHTML=fmt(r.text);history.push({role:'assistant',content:r.text})}
+catch(e){out.textContent=err(e);history.pop()}finally{busy=false;$('send').disabled=false}}
+$('f').onsubmit=e=>{e.preventDefault();ask($('t').value)};
+$('t').onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();ask($('t').value)}};
+async function gen(btn,out,act,prompt,set){btn.disabled=true;const old=btn.textContent;btn.textContent=TT().wait;out.style.display='block';out.textContent='…';
+try{const s=await S();if(!s){out.textContent='AI feature yahan available nahi hai.';return}
+const r=await s(prompt,{cache:false,onText:({text})=>{out.innerHTML=fmt2(text)}});out.innerHTML=fmt2(r.text);set(r.text);act.style.display='flex';mkTools(out,()=>r.text,out.id||'output')}
+catch(e){out.textContent=err(e)}finally{btn.disabled=false;btn.textContent=old}}
+const RS="Tum ek expert resume writer ho. User ne apne bare mein free text mein bataya hai (kisi bhi bhasha mein). Usse ek strong, professional, ATS-friendly resume banao. Markdown format: '# Naam', phir contact ek line, phir '## ' sections (Objective, Education, Skills, Experience ya Projects, Strengths). Strong action verbs aur crisp bullets use karo, objective 2 line ka. SIRF user ki di hui details use karo; koi degree, company, number ya achievement mat banao. Jo detail nahi di use chhod do. Resume ki bhasha: ";
+const DS="Tum ek expert writer ho. Final, ready-to-use content do (markdown: '# Title', '## ' headings, '- ' bullets). Koi fake facts, statistics ya references mat banao. Bhasha: ";
+const rl=()=>lang==='auto'?'wahi jo user ne likhi (job terms English mein)':LN[lang]+' (job terms English mein)';
+const dl2=()=>lang==='auto'?'wahi jo user ne likhi':LN[lang];
+$('rbtn').onclick=()=>{const v=$('r_prompt').value.trim();if(v.length<15){alert('Thoda detail mein likhein: naam, padhai, skills, kaisi job chahiye');return}
+gen($('rbtn'),$('rout'),$('ract'),RS+rl()+"\n\nUser ka text:\n"+v,t=>lastR=t)};
+$('rfix').onclick=()=>{const v=$('r_fix').value.trim();if(!v)return;gen($('rfix'),$('rout'),$('ract'),RS+rl()+"\n\nAbhi ka resume:\n"+lastR+"\n\nUser ka badlav: "+v+"\nPoora updated resume do.",t=>{lastR=t;$('r_fix').value=''})};
+const dk=()=>({assignment:'ek assignment/essay (Introduction, headings, Conclusion)',ppt:'ek presentation ka slide-by-slide outline (har slide: title, 3-4 short bullets, 1 line speaker note), 8-10 slides',letter:'ek formal application/cover letter (To, Subject, Body, closing)',report:'ek structured report/project (Title, Abstract, Sections, Conclusion)',cover:'ek strong cover letter (3-4 short paragraphs, specific, confident)',linkedin:'ek LinkedIn About/bio (3 short paragraphs) aur 1 headline line',notes:'clear study notes/summary (headings, bullets, key points, ek quick revision list)',email:'ek professional email (Subject line + body, polite aur concise)'})[$('d_type').value];
+$('dbtn').onclick=()=>{const v=$('d_prompt').value.trim(),ty=$('d_type').value;if(v.length<8){alert('Batayein kis topic par aur kaisa chahiye');return}
+const pre=ty==='resume'?RS+rl()+"\n\nUser ka text:\n":DS+dl2()+"\n\nBanao: "+dk()+".\nUser ki maang:\n";
+gen($('dbtn'),$('dout'),$('dact'),pre+v,t=>{lastD=t;if(ty==='resume')lastR=t})};
+$('dfix').onclick=()=>{const v=$('d_fix').value.trim(),ty=$('d_type').value;if(!v)return;gen($('dfix'),$('dout'),$('dact'),(ty==='resume'?RS+rl():DS+dl2())+"\n\nAbhi ka document:\n"+lastD+"\n\nUser ka badlav: "+v+"\nPoora updated document do.",t=>{lastD=t;if(ty==='resume')lastR=t;$('d_fix').value=''})};
+async function save(text,name){try{dl=dl||await claude.use('downloads');if(!dl){alert('Save yahan available nahi hai. Text copy kar lein.');return}
+const h='<!DOCTYPE html><html dir="auto"><head><meta charset="utf-8"><title>'+name+'</title><style>body{font-family:Arial,sans-serif;max-width:720px;margin:30px auto;line-height:1.5;color:#111}h1{color:#2f5fe3;margin-bottom:2px}h2{font-size:14px;text-transform:uppercase;letter-spacing:.06em;border-bottom:2px solid #2f5fe3;padding-bottom:3px;margin-top:18px}ul{padding-left:20px}</style></head><body>'+fmt2(text)+'</body></html>';
+await dl.save({filename:name+'.html',data:new Blob([h],{type:'text/html'})})}catch(e){if(!e||e.code!=='declined')alert('Save nahi ho paya.')}}
+$('rdl').onclick=()=>save(lastR,'resume');$('ddl').onclick=()=>save(lastD,'document');
+
+const sl=()=>({auto:'hi-IN',hinglish:'hi-IN',hindi:'hi-IN',english:'en-IN'})[lang]||(INDIAN.includes(lang)?lang+'-IN':lang);
+function listen(cb){const R=window.SpeechRecognition||window.webkitSpeechRecognition;if(!R){alert('Is browser mein voice support nahi hai');return}const r=new R();r.lang=sl();r.interimResults=false;r.onresult=e=>cb(e.results[0][0].transcript);r.onerror=()=>alert('Mic chalu nahi ho paya. Permission check karein.');r.start()}
+function say(t){if(!window.speechSynthesis)return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t.replace(/[#*]/g,''));u.lang=sl();speechSynthesis.speak(u)}
+$('mic').onclick=()=>listen(v=>ask(v));
+const dummy=()=>document.createElement('div');
+const LG=()=>lang==='auto'?'the same language as the user writes in':LN[lang];
+let ivh=[],ivLast='';
+async function ivTurn(text,first){const out=$('iv_out');out.style.display='block';$('iv_send').disabled=true;ivh.push({role:'user',content:text});
+const input=ivh.map((m,i)=>i===0?{role:'user',content:"Tum ek experienced interviewer ho for: "+$('iv_job').value+". Reply language: "+LG()+". Ek baar mein SIRF EK sawaal poocho. User ke jawab ke baad: score /10, 2 bullets kya achha tha, 1-2 improvement tips, 2 line ka better sample answer, phir agla sawaal. 5 sawaal ke baad final report do: total score, top 3 tips. Pehla sawaal poocho (basic se shuru, 'apne bare mein batayein' jaisa).\n\n"+m.content}:m);
+try{const s=await S();const r=await s(input,{cache:false,onText:({text})=>{out.innerHTML=fmt2(text)}});out.innerHTML=fmt2(r.text);ivLast=r.text;ivh.push({role:'assistant',content:r.text});mkTools(out,()=>ivh.map(m=>(m.role==='user'?'Aap: ':'Interviewer: ')+m.content).join('\n\n'),'interview');$('iv_act').style.display='flex'}catch(e){out.textContent=err(e);ivh.pop()}finally{$('iv_send').disabled=false}}
+$('iv_go').onclick=()=>{if(!$('iv_job').value.trim()){alert('Job ya exam ka naam likhein');return}ivh=[];ivTurn('Interview shuru karo.',true)};
+$('iv_send').onclick=()=>{const v=$('iv_ans').value.trim();if(!v)return;$('iv_ans').value='';ivTurn(v)};
+$('iv_mic').onclick=()=>listen(v=>$('iv_ans').value=v);$('iv_say').onclick=()=>say(ivLast);
+$('a_use').onclick=()=>{$('a_res').value=lastR};
+$('a_go').onclick=()=>{if($('a_res').value.trim().length<30||!$('a_job').value.trim()){alert('Resume aur job dono likhein');return}
+gen($('a_go'),$('a_out'),dummy(),"Tum ATS aur hiring expert ho. Reply language: "+LG()+". Resume ko job ke hisaab se check karo. Format: '# Score: X/100', '## Kya achha hai', '## Missing keywords', '## Kya badlein' (specific), '## Behtar bullets' (3-5 rewritten bullets, sirf resume ki di hui facts se, kuch banao mat).\n\nJOB:\n"+$('a_job').value+"\n\nRESUME:\n"+$('a_res').value,()=>{})};
+$('m_go').onclick=()=>{const v=$('m_in').value.trim();if(v.length<10){alert('Thoda detail likhein');return}
+gen($('m_go'),$('m_out'),dummy(),"Tum career coach ho (India context). Reply language: "+LG()+". Is insaan ke liye practical 6-month roadmap do: '# Goal', '## Pehla hafta', '## Mahina 1' ... '## Mahina 6' (har mahine: skills, kya karna hai, FREE resources jaise Skill India, SWAYAM, NPTEL, YouTube, ncs.gov.in), '## Resume aur interview kab', '## Kamai ke options jab tak seekh rahe ho'. Realistic raho, salary ke guarantee mat do.\n\nUser:\n"+v,()=>{})};
+$('q_go').onclick=async()=>{const t=$('q_topic').value.trim();if(!t){alert('Topic likhein');return}const box=$('q_out');box.innerHTML='<div class="out" style="display:block">'+TT().wait+'</div>';$('q_go').disabled=true;
+try{const s=await S();const r=await s("Create "+$('q_n').value+" multiple-choice questions for: "+t+". Language: "+LG()+". Return ONLY a JSON array, no markdown: [{\"q\":\"...\",\"options\":[\"A\",\"B\",\"C\",\"D\"],\"answer\":0,\"why\":\"one-line explanation\"}]. answer is the 0-based index. Only well-known facts, no made-up data.",{cache:false});
+const qs=JSON.parse(r.text.match(/\[[\s\S]*\]/)[0]);let sc=0,done=0;box.innerHTML='';const tot=document.createElement('div');tot.className='out';tot.style.display='block';tot.textContent='Score: 0/'+qs.length;const qtext=()=>'Mock test: '+t+'\nScore: '+sc+'/'+qs.length+'\n\n'+qs.map((x,i)=>(i+1)+'. '+x.q+'\n'+x.options.map((o,j)=>'ABCD'[j]+') '+o).join('\n')+'\nSahi jawab: '+'ABCD'[x.answer]+' - '+x.why).join('\n\n');
+qs.forEach((x,i)=>{const c=document.createElement('div');c.className='out';c.style.display='block';c.style.marginBottom='10px';c.dir='auto';const h=document.createElement('p');h.innerHTML='<b>'+(i+1)+'. </b>'+esc(x.q);c.appendChild(h);const w=document.createElement('p');w.style.display='none';w.textContent='💡 '+x.why;
+x.options.forEach((o,j)=>{const b=document.createElement('button');b.className='btn alt';b.style.cssText='display:block;width:100%;text-align:left;margin:6px 0;font-weight:500';b.textContent=o;b.onclick=()=>{if(c.dataset.d)return;c.dataset.d=1;done++;if(j===x.answer)sc++;[...c.querySelectorAll('button')].forEach((bb,k)=>{if(k===x.answer)bb.style.background='#1f9d55',bb.style.color='#fff';else if(k===j)bb.style.background='#d64545',bb.style.color='#fff'});w.style.display='block';tot.textContent='Score: '+sc+'/'+qs.length+(done===qs.length?' 🎉':'');if(done===qs.length)mkTools(tot,qtext,'mock-test')};c.appendChild(b)});c.appendChild(w);box.appendChild(c)});box.appendChild(tot)}
+catch(e){box.innerHTML='<div class="out" style="display:block">'+(e&&e.code?err(e):'Test nahi ban paya, dobara try karein.')+'</div>'}finally{$('q_go').disabled=false}};
+$('dppt').onclick=async()=>{if(!lastD){alert('Pehle document banayein');return}if(typeof PptxGenJS==='undefined'){alert('PowerPoint library load nahi hui');return}
+const p=new PptxGenJS();let cur=null;const sl2=[];lastD.split('\n').forEach(l=>{let m;if(m=l.match(/^#{1,3} (.+)/)){cur={t:m[1].replace(/\*\*/g,''),b:[]};sl2.push(cur)}else if(cur&&(m=l.match(/^\s*[-*•] (.+)/)))cur.b.push(m[1].replace(/\*\*/g,''));else if(cur&&l.trim())cur.b.push(l.trim().replace(/\*\*/g,''))});
+sl2.forEach((x,i)=>{const sd=p.addSlide();sd.background={color:'F4F6FB'};sd.addShape('rect',{x:0,y:0,w:10,h:1,fill:{color:'2F5FE3'}});sd.addText(x.t,{x:.5,y:.15,w:9,h:.7,fontSize:i?26:30,bold:true,color:'FFFFFF'});if(x.b.length)sd.addText(x.b.map(b=>({text:b,options:{bullet:i>0,breakLine:true}})),{x:.6,y:1.3,w:8.8,h:4,fontSize:18,color:'16203A',valign:'top'})});
+try{const blob=await p.write({outputType:'blob'});dl=dl||await claude.use('downloads');await dl.save({filename:'presentation.pptx',data:blob})}catch(e){if(!e||e.code!=='declined')alert('PowerPoint save nahi ho paya.')}};
+
+const TIPS=["Resume 1 page ka rakhein (fresher ke liye). Sabse zaroori cheezein upar likhein: naam, phone, padhai, skills.","Interview mein 'Apne bare mein batayein' ka jawab 60 second mein tayyar rakhein: padhai, skills, aur aap kya chahte hain.","Job apply karne se pehle company ke bare mein 5 minute padh lein. Interviewer ko yeh turant pata chal jata hai.","Phone par ek professional email ID rakhein (naam.surname@...). Funny ID se bachein.","Har job ke liye resume mein job ke keywords daalein. Isse ATS software aapka resume reject nahi karta.","Interview mein late nahi, 10-15 minute pehle pahunchein. Document ki ek folder mein copy rakhein.","Sirf ek skill mein expert banne se zyada fayda 'ek main skill + computer basics + achhi communication' ka combo deta hai.","Free mein seekhne ke liye: Skill India Digital, SWAYAM, NPTEL, aur YouTube par achhe channels use karein.","Roz 30 minute English bolne ki practice karein, sheeshe ke saamne ya phone record karke. 2 mahine mein fark dikhega.","LinkedIn par photo, headline aur skills bhar lein. Recruiter pehle wahi dekhte hain.","Salary poochne par 'range' batayein, ek fixed number nahi. Pehle market rate dekh lein.","Rejection se seekhein: har interview ke baad 3 baatein likhein, kya achha gaya aur kya sudhaarna hai.","Sarkari exam ke liye roz ek fixed time par padhein. 2 ghante regular, 8 ghante ek din se behtar hai.","Mock test haftay mein kam se kam ek baar dein, aur galat sawaalon ki alag copy banayein.","Naukri.com, Indeed, aur ncs.gov.in jaisi official sites par profile banayein. Roz naye jobs dekhein.","Experience nahi hai? Internship, volunteering, ya chhote project ko resume mein jagah dein.","Interview mein 'mujhe nahi pata' bolna theek hai, par saath mein 'main seekh lunga' aur ek example jodein.","Reference ke liye 2 logon se pehle permission le lein jab unka naam resume mein daalein.","Naukri badalne se pehle 3 mahine ka kharch bachakar rakhein, taaki aap aaram se sahi offer chun sakein.","Offer letter ko dhyan se padhein: salary, joining date, notice period, aur probation ki shartein.","Network banayein: purane classmates aur colleagues se hafte mein ek baar baat karein. Bahut jobs referral se milti hain.","Typing speed aur MS Excel ke basics seekhein. Almost har office job mein kaam aate hain."];
+const SCAMS=["Job ke liye 'registration fee' ya 'security deposit' maangna scam hota hai. Asli company candidate se paise nahi leti.","WhatsApp par 'ghar baithe 5000 roz' wale offer se bachein. Aise kaam aksar fraud hote hain.","Offer letter email Gmail/Yahoo se aaye aur company ki official website par job na ho, to verify karein.","Aadhaar, OTP ya bank details interview se pehle kabhi na dein.","'Sarkari naukri pakki, bas thoda paisa do' bolne waale agent se door rahein. Sarkari bharti sirf official site se hoti hai.","Telegram ya WhatsApp par 'like karo, paise kamao' task scam ek aam jaal hai.","Bhartiyon ko foreign job ka lalach dekar agent paise lete hain. Pehle emigrate.gov.in par agent check karein.","Link par click karke form bharne se pehle URL dekhein: .gov.in ya official company domain hona chahiye."];
+const TOPICS=['Interview','Resume','English bolna','Naye skills','Sarkari exam'];
+const TILES=[['📄','Resume banao','docs'],['🎤','Interview practice','iv'],['🏛','Yojana dhundho','sc'],['🧪','Mock test','qz'],['🗺','Roadmap','rm'],['✅','Resume score','ats']];
+const go=id=>document.querySelector('nav [data-p="'+id+'"]').click();
+(function(){const d=Math.floor(Date.now()/864e5);$('tip').textContent=TIPS[d%TIPS.length];$('scam').textContent=SCAMS[d%SCAMS.length];
+try{$('t_date').textContent=new Date().toLocaleDateString('hi-IN',{weekday:'long',day:'numeric',month:'long'})}catch(e){$('t_date').textContent='Aaj'}
+TILES.forEach(([e,t,id])=>{const b=document.createElement('button');b.className='tile';b.innerHTML='<b>'+e+'</b>'+t;b.onclick=()=>go(id);$('tiles').appendChild(b)});
+TOPICS.forEach(t=>{const b=document.createElement('button');b.textContent=t;b.className='btn alt';b.onclick=()=>gen(b,$('t_out'),dummy(),"Tum India ke job-seekers ke coach ho. Reply language: "+LG()+". '"+t+"' par 5 practical, specific tips do (chhote bullets, har tip ek-do line). Koi guarantee ya fake statistic nahi.",()=>{});$('tchips').appendChild(b)});
+const SC=['PM Kaushal Vikas (PMKVY)','PM Vishwakarma','PMEGP loan','Mudra loan','Apprenticeship (NAPS)','Lakhpati Didi','Startup India','Skill India Digital'];
+SC.forEach(n=>{const b=document.createElement('button');b.textContent=n;b.onclick=()=>{$('s_in').value=n+' ke bare mein poori jaankari do: kaun apply kar sakta hai, kya milta hai, kaise apply karein.'};$('schips').appendChild(b)});
+const CARDS=[['resume','📄','Resume / CV','Apne bare mein likhein: naam, padhai, skills, experience, kaisi job chahiye…'],['cover','✉️','Cover letter','Kis job/company ke liye, aapka background aur kyun fit hain…'],['assignment','📝','Assignment','Topic, class/level, kitne page, kaisi bhasha…'],['ppt','📊','Presentation','Topic, kitni slides, kis ke liye (school/office/interview)…'],['letter','📨','Application letter','Kisko, kis kaam ke liye (leave, job, complaint…) aur details…'],['report','📚','Project report','Project ka naam, kya kiya, level (school/college)…'],['linkedin','🔗','LinkedIn bio','Aapka kaam, skills, kya dhundh rahe hain…'],['notes','🗒','Notes / summary','Topic ya text paste karein jiske notes chahiye…'],['email','📧','Pro email','Kisko, kis baare mein, tone (formal/friendly)…']];
+const sync=v=>{$('d_type').value=v;document.querySelectorAll('#d_cards .tile').forEach(t=>t.classList.toggle('on',t.dataset.v===v));const c=CARDS.find(x=>x[0]===v);$('d_prompt').placeholder=c[3]};
+CARDS.forEach(c=>{const b=document.createElement('button');b.className='tile';b.dataset.v=c[0];b.innerHTML='<b>'+c[1]+'</b>'+c[2];b.onclick=()=>sync(c[0]);$('d_cards').appendChild(b)});sync('resume');
+$('theme').onclick=()=>{const r=document.documentElement;const l=r.dataset.theme==='light';r.dataset.theme=l?'dark':'light';$('theme').textContent=l?'☀️':'🌙'};
+})();
+$('s_go').onclick=()=>{const v=$('s_in').value.trim();if(v.length<8){alert('Apni situation thodi detail mein likhein');return}
+gen($('s_go'),$('s_out'),dummy(),"Tum Indian government schemes ke jaankar ho. Reply language: "+LG()+". User ki situation ke hisaab se 3-5 sabse relevant, ASLI aur jaani-maani schemes batao (central schemes pehle, phir state ki agar user ne state batayi ho). Har scheme ke liye: '## Scheme ka naam', phir bullets: Kaun eligible, Kya fayda, Kaise apply karein, Official website. Agar amount, date ya rule ke bare mein pakka nahi ho to number mat likho, 'official site par check karein' likho. Koi nayi ya fake scheme mat banao. Aakhir mein: 'Apply karne se pehle official site par verify karein, aur kisi agent ko paise na dein.'\n\nUser: "+v+"\nCategory: "+$('s_cat').value+"\nGoal: "+$('s_goal').value,()=>{})};
+
+let waText='';
+const waFmt=t=>t.replace(/^#{1,3} (.+)$/gm,'*$1*').replace(/\*\*(.+?)\*\*/g,'*$1*').replace(/^\s*[-•] /gm,'• ')+'\n\n— Rozgaar Sahayak';
+function waUpd(){const cc=($('wa_cc').value||'91').replace(/\D/g,''),n=$('wa_n').value.replace(/\D/g,'').replace(/^0+/,'');const ok=cc&&n.length>=7&&n.length<=12,a=$('wa_go');a.classList.toggle('off',!ok);a.href=ok?'https://wa.me/'+cc+n+'?text='+encodeURIComponent(waText.slice(0,3000)):'#';try{localStorage.setItem('wa_n',$('wa_n').value);localStorage.setItem('wa_cc',$('wa_cc').value)}catch(e){}}
+function openWA(t){waText=waFmt(t);$('wa').style.display='flex';waUpd()}
+$('wa_cc').oninput=$('wa_n').oninput=waUpd;$('wa_x').onclick=()=>$('wa').style.display='none';
+$('wa').onclick=e=>{if(e.target.id==='wa')$('wa').style.display='none'};
+$('wa_copy').onclick=async()=>{try{await navigator.clipboard.writeText(waText)}catch(e){const a=document.createElement('textarea');a.value=waText;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(_){}a.remove()}$('wa_copy').textContent='✅ Copy ho gaya'};
+try{$('wa_n').value=localStorage.getItem('wa_n')||'';$('wa_cc').value=localStorage.getItem('wa_cc')||'91'}catch(e){}
+const NM={t_out:'tips',s_out:'yojana',a_out:'resume-score',m_out:'roadmap',dout:'document',rout:'resume'};
+function toolsInto(t,get,name,noSave){t.innerHTML='';if(!noSave){const b=document.createElement('button');b.className='btn alt';b.type='button';b.textContent='⬇ Download';b.onclick=()=>save(get(),name);t.appendChild(b)}
+const w=document.createElement('button');w.className='btn alt';w.type='button';w.textContent='📲 WhatsApp';w.onclick=()=>openWA(get());t.appendChild(w)}
+function mkTools(out,get,name){let t=out.nextElementSibling;if(!t||!t.classList.contains('tools')){t=document.createElement('div');t.className='tools';out.after(t)}toolsInto(t,get,NM[out.id]||name||'output',out.id==='dout'||out.id==='rout')}
+toolsInto($('ctools'),()=>history.map(m=>(m.role==='user'?'Aap: ':'Sahayak: ')+m.content).join('\n\n')||'Abhi koi chat nahi hai.','chat');$('ctools').className='tools';$('ctools').style.padding='8px 12px 0';
+(function(){const sel=$('lang');let og=null;LANGS.forEach(x=>{if(!x[2]){og=document.createElement('optgroup');og.label=x[1];sel.appendChild(og)}else{const o=document.createElement('option');o.value=x[0];o.textContent=x[1];(['auto','hinglish','hindi'].includes(x[0])?sel:(og||sel)).appendChild(o)}});sel.value='hinglish'})();
+hello();ui();
+</script>
+</body>
+</html>
